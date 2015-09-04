@@ -1,6 +1,7 @@
 package xdapp.cn.shell.com.xdapp.model;
 
 import com.avos.avoscloud.AVClassName;
+import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 
 /**
@@ -19,5 +20,14 @@ public class Item extends AVObject {
     public String getURL()
     {
         return getString("URL");
+    }
+    public void SetType(String type){put("Type",type);}
+    public String getType(){ return getString("Type");}
+    public Item fetchItem() throws AVException {
+
+        if (null == this.getCreatedAt()) {
+             return (Item) this.fetch();
+        }
+        return null;
     }
 }

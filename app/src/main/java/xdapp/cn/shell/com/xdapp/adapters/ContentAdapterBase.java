@@ -25,7 +25,6 @@ public abstract class ContentAdapterBase<T> extends RecyclerView.Adapter<Recycle
     protected LayoutInflater mInflater;
     protected DataController<T> mDataController;
     protected View mLoadingMoreView;
-
     public ContentAdapterBase(Context mContext, final DataController<T> mDataController) {
         this.mContext = mContext;
         this.mDataController = mDataController;

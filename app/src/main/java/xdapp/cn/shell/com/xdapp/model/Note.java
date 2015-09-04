@@ -27,6 +27,6 @@ public class Note extends AVObject{
     }
     public List<NoteItem> getNoteItems()
     {
-        return getList("NoteItems",NoteItem.class);
+        return getList("NoteItems", NoteItem.class);
     }
 }

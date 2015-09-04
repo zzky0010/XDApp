@@ -6,6 +6,7 @@ import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ public abstract class CommonFragment<T> extends ContentFragmentBase<T> {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_content, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_content);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mPagerPage = (ViewGroup) rootView.findViewById(R.id.pager_page);
         mLoadingPage = (ViewGroup) rootView.findViewById(R.id.loading_page);
         mLoadingBar = (ContentLoadingProgressBar) mLoadingPage.findViewById(R.id.loading_bar);

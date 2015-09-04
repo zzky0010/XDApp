@@ -1,9 +1,11 @@
 package xdapp.cn.shell.com.xdapp.holders;
 
+import android.content.Context;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import xdapp.cn.shell.com.xdapp.R;
 
@@ -19,8 +21,8 @@ public class FooterViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void onBindViewHolder() {
-        tips.setText("到头了");
-        tips.setVisibility(View.VISIBLE);
-        progressBar.hide();
+//        tips.setText("到头了");
+//        tips.setVisibility(View.VISIBLE);
+                progressBar.hide();
     }
 }

@@ -2,7 +2,9 @@ package xdapp.cn.shell.com.xdapp.model;
 
 import com.avos.avoscloud.AVClassName;
 import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,6 +22,6 @@ public class NoteItem extends AVObject{
     }
     public List<Item> getItems()
     {
-        return getList("Items",Item.class);
+        return getList("Items", Item.class);
     }
 }

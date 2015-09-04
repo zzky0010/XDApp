@@ -10,36 +10,53 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
+
 import xdapp.cn.shell.com.xdapp.R;
+import xdapp.cn.shell.com.xdapp.adapters.NoteListAdapter;
 import xdapp.cn.shell.com.xdapp.model.Note;
+import xdapp.cn.shell.com.xdapp.widget.RatioImageView;
 
 public class EntryViewHolder extends RecyclerView.ViewHolder {
-    public final ImageView thumb;
-    public final TextView title, content, time;
-    public final View parent;
-
+    public final RatioImageView thumb;
+    public final TextView title;
+    public static View parent;
+    private static NoteListAdapter mAdapter;
     private EntryViewHolder(View itemView) {
         super(itemView);
-        thumb = (ImageView) itemView.findViewById(R.id.thumb);
+        thumb = (RatioImageView) itemView.findViewById(R.id.thumb);
         title = (TextView) itemView.findViewById(R.id.title);
-        content = (TextView) itemView.findViewById(R.id.content);
-        time = (TextView) itemView.findViewById(R.id.time);
         parent = itemView;
     }
 
-    public static EntryViewHolder create(final Context context, ViewGroup parent) {
-        View v = LayoutInflater.from(context).inflate(R.layout.note_item, parent, false);
-        v.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    public static EntryViewHolder create(NoteListAdapter adapter,final Context context, ViewGroup parent) {
+        mAdapter = adapter;
+        EntryViewHolder.parent = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_item, parent, false);
 
-            }
-        });
-        return new EntryViewHolder(v);
+        return new EntryViewHolder(EntryViewHolder.parent);
     }
 
     public void onBindViewHolder(Note entry) {
         parent.setTag(entry);
+        title.setText(entry.getName());
+        thumb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAdapter.mOnMMClickListener.OnMMClick(thumb,title,thumb,entry.getMMUrl(),entry.getName(),entry.getDate());
+            }
+        });
+        EntryViewHolder.parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAdapter.mOnMMClickListener.OnMMClick(title,title,thumb,entry.getMMUrl(),entry.getName(),entry.getDate());
+            }
+        });
+        thumb.setOriginalSize((int) (50), 50);
 
+        Glide.with(thumb.getContext())
+                .load(entry.getMMUrl())
+                .centerCrop()
+                .into(thumb);
     }
+
 }

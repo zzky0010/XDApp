@@ -1,53 +1,19 @@
 package xdapp.cn.shell.com.xdapp;
-
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.AVUser;
-import com.google.gson.Gson;
-
-import xdapp.cn.shell.com.xdapp.model.Note;
-import xdapp.cn.shell.com.xdapp.model.NoteItem;
-import xdapp.cn.shell.com.xdapp.model.SubItem;
+import xdapp.cn.shell.com.xdapp.fragments.NoteListFragment;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                 Note note = new Note();
-                note.setDate("77777");
-                note.setICON_URL("2222");
-                note.setName("23333");
-                NoteItem n_item = new NoteItem();
-                n_item.setType(1);
-                n_item.setTypeName("4444");
-                SubItem s_item = new SubItem();
-                s_item.setDes("55555");
-                s_item.setLink("66666");
-                n_item.addSubItems(s_item);
-                note.setItem(n_item);
-
-                AVObject notetable = new AVObject("Note");
-                Gson g = new Gson();
-                String json = g.toJson(note, note.getClass());
-                notetable.put("JSON",json);
-                try {
-                    notetable.save();
-                } catch (AVException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new NoteListFragment()).commit();
     }
 
     @Override
