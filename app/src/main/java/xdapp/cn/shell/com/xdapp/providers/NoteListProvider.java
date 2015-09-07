@@ -21,19 +21,19 @@ public class NoteListProvider extends DataController<Note> {
         Note_query.include("NoteItems");
         Note_query.include("NoteItems.Items");
         List<Note> noteList = Note_query.find();
-        for(Note note:noteList)
-        {
-            for(NoteItem noteItem:note.getNoteItems())
-            {
-                for(Item item:noteItem.getItems())
-                {
-                    item = item.fetchItem();
-                }
-            }
-        }
-        int size = noteList.get(0).getNoteItems().get(0).getItems().size();
-        String type = noteList.get(0).getNoteItems().get(0).getItems().get(0).getName();
-        Log.d("",type + size);
+//        for(Note note:noteList)
+//        {
+//            for(NoteItem noteItem:note.getNoteItems())
+//            {
+//                for(Item item:noteItem.getItems())
+//                {
+//                    item = item.fetchItem();
+//                }
+//            }
+//        }
+//        int size = noteList.get(0).getNoteItems().get(0).getItems().size();
+//        String type = noteList.get(0).getNoteItems().get(0).getItems().get(0).getName();
+//        Log.d("",type + size);
         XDSingleTon.getSingleton().SetNoteList(noteList);
        return  noteList;
     }

@@ -26,7 +26,7 @@ public class Item extends AVObject {
     public Item fetchItem() throws AVException {
 
         if (null == this.getCreatedAt()) {
-             return (Item) this.fetch();
+             return (Item) this.fetchIfNeeded();
         }
         return null;
     }
